@@ -1,0 +1,45 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+}
+
+enum MessageRole {
+  USER
+  ASSISTANT
+}
+
+model ChatSession {
+  id           String    @id @default(cuid())
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  messages     Message[]
+  lead         Lead?
+  messageCount Int       @default(0)
+}
+
+model Message {
+  id        String      @id @default(cuid())
+  sessionId String
+  role      MessageRole
+  content   String      @db.Text
+  createdAt DateTime    @default(now())
+  session   ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId])
+}
+
+model Lead {
+  id        String      @id @default(cuid())
+  sessionId String      @unique
+  name      String
+  email     String      @unique
+  company   String?
+  createdAt DateTime    @default(now())
+  notified  Boolean     @default(false)
+  session   ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([email])
+}
