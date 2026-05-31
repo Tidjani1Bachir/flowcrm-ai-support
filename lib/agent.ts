@@ -120,7 +120,6 @@ export function buildLeadNotificationMessage(lead: LeadSubmission) {
     `Name: ${lead.name}`,
     `Email: ${lead.email}`,
     companyLine.trimEnd(),
-    `Message: ${lead.message}`,
   ]
     .filter(Boolean)
     .join("\n");
