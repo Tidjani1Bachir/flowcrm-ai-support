@@ -5,7 +5,7 @@ export default function HomePage() {
     <main className="min-h-screen bg-slate-950 text-slate-100">
       <div className="border-b border-white/10 bg-slate-900/80 px-4 py-3 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-center text-sm font-medium text-slate-200">
-          🤖 AI Support Demo — Powered by GPT-4o-mini
+          🤖 AI Support Demo
         </div>
       </div>
 
